@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<h2>List of ratings</h2>
+
+<p>Number of ratings: <%= @ratings.count %></p>
+
+<div id="ratings">
+  <ul>
+    <% @ratings.each do |rating| %>
+      <li> <%= rating %>
+      <%= button_to 'delete', rating, method: :delete, 
+          form: { 
+            data: { 
+              turbo_confirm: 
+                "You are about to delete a rating of #{rating.score} for #{rating.beer.name}.
+                \nContinue?"
+            } 
+          }
+      %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+  <%= link_to "New rating", new_rating_path %>
+</div>
