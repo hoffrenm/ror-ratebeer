@@ -1,24 +1,3 @@
-# README
+### Tehtävien palautusrepositorio Helsingin yliopiston kurssille [web-palvelinohjelmointi Ruby on Rails, syksy 2022](https://github.com/mluukkai/WebPalvelinohjelmointi2022/blob/main/wadror.md)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### [Sovellus fly.io:ssa](https://wandering-leaf-1917.fly.dev/)
