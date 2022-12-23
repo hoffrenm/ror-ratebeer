@@ -7,21 +7,16 @@
 <div id="ratings">
   <ul>
     <% @ratings.each do |rating| %>
-      <li> <%= rating %>
-      <%= button_to 'delete', rating, method: :delete, 
-          form: { 
-            data: { 
-              turbo_confirm: 
-                "You are about to delete a rating of #{rating.score} for #{rating.beer.name}.
-                \nContinue?"
-            } 
-          }
-      %>
+      <li>
+        <%= rating %>
+        <%= link_to rating.user.username, user_path(rating.user) %>
       </li>
     <% end %>
   </ul>
 </div>
 
-<div>
-  <%= link_to "New rating", new_rating_path %>
-</div>
+<% if current_user %>
+  <div>
+    <%= link_to "New rating", new_rating_path %>
+  </div>
+<% end %>
