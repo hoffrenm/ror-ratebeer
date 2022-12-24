@@ -57,9 +57,7 @@ describe "User" do
 
     visit user_path(user1)
 
-    page.within("#ratings") do
-      click_link("delete", href: "/ratings/2")
-    end
+    click_link('delete', match: :first)
 
     expect(page).to have_content "#{user1.username} has made 2 ratings"
     expect(Rating.count).to eq(2)
