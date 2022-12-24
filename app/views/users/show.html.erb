@@ -1,5 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
+<h2><%= @user.username %></h2>
+
 <p>
   <%= @user.username %> 
   has made 
@@ -17,6 +19,10 @@
   </ul>
 </div>
 
+<p>Favorite style of beer: <strong><%= @user.favorite_style %></strong></p>
+
+<p>Favorite brewery: <strong><%= @user.favorite_brewery %></strong></p>
+
 <div id="ratings">
   <b>Ratings</b>
   <ul>
@@ -25,12 +31,7 @@
         <%= rating %>
         <% if @user == current_user %>
         <%= link_to 'delete', rating, 
-          data: { 
-            turbo_confirm: 
-              "You are about to delete a rating of #{rating.score} for #{rating.beer.name}.
-              \nContinue?",
-            turbo_method: :delete
-          } 
+          data: { turbo_method: :delete } 
         %>
       <% end %>
       </li>
