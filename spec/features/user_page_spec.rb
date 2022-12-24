@@ -50,39 +50,35 @@ describe "User" do
   end
 
   it "can delete a given rating on user page" do
-    user = FactoryBot.create(:user, username: "Aku")
+    user1 = FactoryBot.create(:user, username: "Aku")
     sign_in(username: "Aku", password: "Foobar1")
 
-    create_beers_with_many_ratings({ user: user }, 12, 30, 42)
+    create_beers_with_many_ratings({ user: user1 }, 12, 30, 42)
 
-    visit user_path(user)
-
+    visit user_path(user1)
 
     page.within("#ratings") do
       click_link("delete", href: "/ratings/2")
     end
 
-    page.save_and_open_page
-
-    
-    expect(page).to have_content "#{user.username} has made 2 ratings"
+    expect(page).to have_content "#{user1.username} has made 2 ratings"
     expect(Rating.count).to eq(2)
   end
 
   it "can see user's favorite style of beer on user page" do
-    user = FactoryBot.create(:user, username: "Aku")
-    populate_user_with_beers_ratings({ user: user })
+    user1 = FactoryBot.create(:user, username: "Aku")
+    populate_user_with_beers_ratings({ user: user1 })
 
-    visit user_path(user)
+    visit user_path(user1)
 
     expect(page).to have_content "Favorite style of beer: Lager"
   end
 
   it "can see user's favorite brewery on user page" do
-    user = FactoryBot.create(:user, username: "Aku")
-    populate_user_with_beers_ratings({ user: user })
+    user1 = FactoryBot.create(:user, username: "Aku")
+    populate_user_with_beers_ratings({ user: user1 })
 
-    visit user_path(user)
+    visit user_path(user1)
 
     expect(page).to have_content "Favorite brewery: Malmgard"
   end
