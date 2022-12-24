@@ -57,7 +57,13 @@ describe "User" do
 
     visit user_path(user)
 
-    click_link('delete', href: '/ratings/2')
+
+    page.within("#ratings") do
+      click_link("delete", href: "/ratings/2")
+    end
+
+    page.save_and_open_page
+
     
     expect(page).to have_content "#{user.username} has made 2 ratings"
     expect(Rating.count).to eq(2)
