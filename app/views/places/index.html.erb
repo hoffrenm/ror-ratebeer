@@ -1,0 +1,38 @@
+<h1>Beer places search</h1>
+
+<p id="notice"><%= notice %></p>
+
+<%= form_with url: places_path, method: :post do |form| %>
+  city <%= form.text_field :city %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<% if @weather %>
+  <p><b>Current weather in <%= @weather.city.name %></b></p>
+  <%= image_tag "http://openweathermap.org/img/wn/#{@weather.weather.icon}@2x.png" %>
+  <p><b>Temperature: </b><%= @weather.temperature.value %> <%= @weather.temperature.unit %></p>
+  <p><b>Wind: </b><%= @weather.wind.speed.value %> <%= @weather.wind.speed.unit %>, Direction: <%= @weather.wind.direction.name %></p>
+<% end %>
+
+<% if @places %>
+  <table>
+    <thead>
+      <% Place.rendered_fields.each do |field| %>
+        <th><%= field %></th>
+      <% end %>
+    </thead>
+    <% @places.each do |place| %>
+      <tr>
+        <% Place.rendered_fields.each do |field| %>
+          <td>
+            <% if field == :name %>
+              <%= link_to place.name, place_path(place.id) %>
+            <% else %>
+              <%= place.send(field) %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

@@ -23,6 +23,8 @@ end
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'httparty'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -84,4 +86,5 @@ group :test do
   gem 'factory_bot_rails'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end

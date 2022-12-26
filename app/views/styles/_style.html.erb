@@ -1,0 +1,21 @@
+<div id="<%= dom_id style %>">
+  <p>
+    <strong>Name:</strong>
+    <%= style.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= style.description %>
+  </p>
+
+  <div id="beers">
+    <b>Beers</b>
+    <ul>
+      <% style.beers.each do |beer| %>
+        <li> <%= beer %> </li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>

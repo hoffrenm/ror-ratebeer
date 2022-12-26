@@ -4,6 +4,7 @@ include Helpers
 
 describe "Beer" do
   let!(:brewery) { FactoryBot.create :brewery, name: "Testwery" }
+  let!(:style) { FactoryBot.create :style, name: "Tewsty", description: "Awesome taste" }
   let!(:user) { FactoryBot.create :user }
 
   it "can be created with valid fields" do
