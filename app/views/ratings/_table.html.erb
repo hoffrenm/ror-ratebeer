@@ -1,0 +1,19 @@
+<div class="col-sm">
+  <h4><%= title %></h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col" class="text-nowrap">Average rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% entries.each do |entry| %>
+          <tr>
+            <td class="text-nowrap"><%= entry.name %></td>
+            <td class="text-center"><span><%= round(entry.average_rating) %></span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

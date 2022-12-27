@@ -12,21 +12,22 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.label :name, style: "display: block", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :style, style: "display: block" %>
-    <%= form.select :style_id, options_from_collection_for_select(@styles, :id, :name) %>
+    <%= form.label :style, style: "display: block", class: "form-label" %>
+    <%= form.select :style_id, options_from_collection_for_select(@styles, :id, :name), {}, class: "form-select" %>
   </div>
 
   <div>
-    <%= form.label :brewery_id, style: "display: block" %>
-    <%= form.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name) %>
+    <%= form.label :brewery_id, style: "display: block", class: "form-label" %>
+    <%= form.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name), {}, class: "form-select" %>
   </div>
 
+  <br>
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-success" %>
   </div>
 <% end %>

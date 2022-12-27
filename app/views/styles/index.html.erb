@@ -1,15 +1,26 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Styles</h1>
 
 <div id="styles">
-  <ul>
-    <% @styles.each do |style| %>
-      <li>
-        <%= link_to style.name, style %>
-      </li>
-    <% end %>
-  </ul>
+  <table class="table table-striped">
+      <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th class="text-center" scope="col">Beers</th>
+      <th class="text-center" scope="col">Ratings</th>
+      <th class="text-center" scope="col">Average</th>
+    </tr>
+  </thead>
+    <tbody>
+      <% @styles.each do |style| %>
+        <tr>
+          <td><%= link_to style.name, style %></td>
+          <td class="text-center"><%= style.beers.count %></td>
+          <td class="text-center"><%= style.ratings.count %></td>
+          <td class="text-center"><%= round(style.average_rating) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New style", new_style_path %>
+<%= link_to "New style", new_style_path, class: "btn btn-primary" %>

@@ -1,6 +1,11 @@
 class RatingsController < ApplicationController
   def index
     @ratings = Rating.all
+    @recent_ratings = Rating.most_recent
+    @top_raters = User.top_raters(3)
+    @best_beers = Beer.top(3)
+    @best_breweries = Brewery.top(3)
+    @best_styles = Style.top(3)
   end
 
   def new
@@ -13,7 +18,7 @@ class RatingsController < ApplicationController
     @rating.user = current_user
 
     if @rating.save
-      redirect_to user_path current_user
+      redirect_to beer_path @rating.beer
     else
       @beers = Beer.all
       render :new, status: :unprocessable_entity

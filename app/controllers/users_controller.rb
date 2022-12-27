@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :check_admin, only: [:destroy, :toggle_activity]
 
   # GET /users or /users.json
   def index
@@ -19,12 +20,22 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def toggle_activity
+    user = User.find(params[:id])
+    user.update_attribute :active, !user.active
+
+    new_status = user.active? ? "activated" : "closed"
+    redirect_to user, notice: "User account is now #{new_status}"
+  end
+
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @user.active = true
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -51,13 +62,16 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    return unless current_user == @user
-
     @user.destroy
-    reset_session
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      if current_user.admin
+        format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      else
+        reset_session
+        format.html { redirect_to root_path, notice: "We are sorry to see you go" }
+      end
+
       format.json { head :no_content }
     end
   end

@@ -13,22 +13,23 @@
 
 <% if @user.new_record? %>
   <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
+    <%= form.label :username, style: "display: block", class:"form-label" %>
+    <%= form.text_field :username, class: "form-control" %>
   </div>
 <% end %>
 
   <div>
-    <%= form.label :password, style: "display: block"%>
-    <%= form.password_field :password %>
+    <%= form.label :password, style: "display: block", class:"form-label" %>
+    <%= form.password_field :password, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :password_confirmation, style: "display: block"%>
-    <%= form.password_field :password_confirmation %>
+    <%= form.label :password_confirmation, style: "display: block", class:"form-label" %>
+    <%= form.password_field :password_confirmation, class: "form-control" %>
   </div>
 
+  <br />
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-success" %>
   </div>
 <% end %>

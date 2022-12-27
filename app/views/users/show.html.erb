@@ -1,49 +1,56 @@
-<p style="color: green"><%= notice %></p>
-
-<h2><%= @user.username %></h2>
-
-<p>
-  <%= @user.username %> 
-  has made 
-  <%= @user.ratings.count %> 
-  ratings with average rating of 
-  <%= @user.average_rating %>
-</p>
-
-<div id="beerclubs">
-  <b>Member of</b>
-  <ul>
-    <% @user.clubs.each do |club| %>
-      <li> <%= link_to club.name, club %> </li>
-    <% end %>
-  </ul>
-</div>
-
-<p>Favorite style of beer: <strong><%= @user.favorite_style %></strong></p>
-
-<p>Favorite brewery: <strong><%= @user.favorite_brewery %></strong></p>
-
-<div id="ratings">
-  <b>Ratings</b>
-  <ul>
-    <% @user.ratings.each do |rating| %>
-      <li>
-        <%= rating %>
-        <% if @user == current_user %>
-          <%= link_to 'delete', rating, data: { turbo_method: :delete } %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-
 <div>
-  <% if @user == current_user %>
-    <p>
-      <%= link_to "Edit this user", edit_user_path(@user) %>
-      <%= button_to "Destroy this user", @user, method: :delete %>
-    </p>
-  <% end %>
+  <h1>
+    <%= @user.username %>
+    <% if not @user.active %>
+      <span class="badge bg-danger">Closed</span>
+    <% end %>
+  </h1>
 
-  <%= link_to "Back to users", users_path %>
+  <p>
+    <%= @user.username %> 
+    has made 
+    <%= @user.ratings.count %> 
+    ratings with average rating of 
+    <%= round(@user.average_rating) %>
+  </p>
+
+  <div id="beerclubs">
+    <b>Member of</b>
+    <ul>
+      <% @user.clubs.each do |club| %>
+        <li> <%= link_to club.name, club %> </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <p>Favorite style of beer: <strong><%= @user.favorite_style %></strong></p>
+
+  <p>Favorite brewery: <strong><%= @user.favorite_brewery %></strong></p>
+
+  <div id="ratings">
+    <b>Ratings</b>
+    <ul>
+      <% @user.ratings.each do |rating| %>
+        <li>
+          <%= rating %>
+          <% if @user == current_user %>
+            <%= link_to 'delete', rating, data: { turbo_method: :delete } %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div>
+    <%= link_to "Back to users", users_path, class: "btn btn-primary" %>
+    <%= edit_and_destroy_buttons(@user) if current_user == @user || current_user&.admin %>
+
+    <% if current_user&.admin %>
+      <% if @user.active%>
+        <%= link_to "Close account", toggle_activity_user_path(@user.id), data: { turbo_method: "post"}, class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "Activate account", toggle_activity_user_path(@user.id), data: {turbo_method: "post"}, class: "btn btn-success" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

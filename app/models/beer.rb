@@ -10,6 +10,11 @@ class Beer < ApplicationRecord
   validates :style, presence: true
 
   def to_s
-    "#{name} by #{brewery.name}"
+    name.to_s
+  end
+
+  def self.top(n)
+    sorted_by_rating_in_desc_order = Beer.all.sort_by{ |b| -b.average_rating }
+    sorted_by_rating_in_desc_order.first(n)
   end
 end

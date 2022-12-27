@@ -1,6 +1,9 @@
 <div id="<%= dom_id brewery %>">
-  <h2>
+ <h2>
     <%= brewery.name %>
+    <% if not brewery.active  %>
+      <span class="badge bg-secondary">retired</span>
+    <% end %>
   </h2>
 
   <i>
@@ -11,22 +14,37 @@
     Beers count: <%= brewery.beers.count %>
   </p>
 
-  <p>
-    <% brewery.beers.each do |beer| %>
-      <%= link_to beer.name, beer %>
-    <% end %>
-  </p>
+  <div id="beers">
+    <table class="table">
+        <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Ratings given</th>
+        <th scope="col">Average rating</th>
+      </tr>
+    </thead>
+      <tbody>
+        <% @brewery.beers.each do |beer| %>
+          <tr>
+            <td><%= link_to beer.name, beer %></td>
+            <td><%= beer.ratings.count %></td>
+            <td><%= round(beer.average_rating) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
   <p>
     <% if brewery.ratings.empty? %>
       This brewery has no rated beers
     <% else %>
       Brewery has 
-      <%= brewery.beers.count %> <%= 'beer'.pluralize(brewery.beers.count) %>
+      <b><%= brewery.beers.count %> <%= 'beer'.pluralize(brewery.beers.count) %></b>
       with total of
-      <%= brewery.ratings.count %> <%= 'rating'.pluralize(brewery.ratings.count) %> 
+      <b><%= brewery.ratings.count %> <%= 'rating'.pluralize(brewery.ratings.count) %></b>
       which average rating is
-      <%= brewery.average_rating %>
+      <b><%= round(brewery.average_rating) %></b>
     <% end %>
   </p>
 

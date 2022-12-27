@@ -13,7 +13,7 @@
     <b>Beers</b>
     <ul>
       <% style.beers.each do |beer| %>
-        <li> <%= beer %> </li>
+        <li> <%= link_to beer.name, beer %> </li>
       <% end %>
     </ul>
   </div>

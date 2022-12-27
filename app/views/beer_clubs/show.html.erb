@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @beer_club.name %>
@@ -31,20 +29,18 @@
     <% if current_user.clubs.include?(@beer_club) %>
       <%= form_with(url: membership_path, method: :delete) do |form| %>
         <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
-        <%= form.submit "End the membership" %>
+        <%= form.submit "End the membership", class: "btn btn-danger" %>
       <% end %>
     <% else %>
       <%= form_with(model: @membership) do |form| %>
         <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
-        <%= form.submit "Join the beer club" %>
+        <%= form.submit "Join the beer club", class: "btn btn-success" %>
       <% end %>
     <% end %>
   <% end %>
 </p>
 
 <div>
-  <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club) if current_user %>
-  <%= link_to "Back to beer clubs", beer_clubs_path %>
-
-  <%= button_to "Destroy this beer club", @beer_club, method: :delete if current_user %>
+  <%= link_to "Back to beer clubs", beer_clubs_path, class:"btn btn-primary" %>
+  <%= edit_and_destroy_buttons(@beer_club)%>
 </div>

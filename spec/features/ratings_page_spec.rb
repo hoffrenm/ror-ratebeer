@@ -27,16 +27,23 @@ describe "Rating" do
   end
 
   describe "when visiting ratings page" do
-    it "amount of ratings is shown" do
+    it "tables for top breweries, beers and styles are shown" do
+      visit ratings_path
+
+      expect(page).to have_content "Best breweries"
+      expect(page).to have_content "Best beers"
+      expect(page).to have_content "Best styles"
+    end
+
+    it "given amount of ratings are shown" do
       create_beers_with_many_ratings({ user: user }, 18, 46, 3, 29, 37, 12)
 
       visit ratings_path
-      
-      expect(page).to have_content "Number of ratings: 6"
+
+      expect(page).to have_content "Pekka 6 ratings"
       expect(page).to have_content "anonymous 46"
       expect(page).to have_content "anonymous 37"
+      expect(page).to have_content "anonymous 12"
     end
   end
-
-
 end

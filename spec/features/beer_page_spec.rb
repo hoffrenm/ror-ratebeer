@@ -16,6 +16,7 @@ describe "Beer" do
     expect{
       click_button "Create Beer"
     }.to change{Beer.count}.from(0).to(1)
+    expect(page).to have_content "Tewsty"
   end
   
   it "shows error if name is missing" do

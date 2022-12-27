@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   resources :memberships, only: [:index, :new, :create, :destroy]
   resources :places, only: [:index, :show]
   resource :session, only: [:new, :create, :destroy]
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  resources :users do
+    post 'toggle_activity', on: :member
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
