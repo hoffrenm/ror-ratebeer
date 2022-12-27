@@ -13,8 +13,8 @@ class Beer < ApplicationRecord
     name.to_s
   end
 
-  def self.top(n)
+  def self.top(amount)
     sorted_by_rating_in_desc_order = Beer.all.sort_by{ |b| -b.average_rating }
-    sorted_by_rating_in_desc_order.first(n)
+    sorted_by_rating_in_desc_order.first(amount)
   end
 end

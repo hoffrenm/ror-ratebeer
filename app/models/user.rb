@@ -19,9 +19,9 @@ class User < ApplicationRecord
 
   validates :password, presence: true, format: { with: PASSWORD_REQUIREMENTS }
 
-  def self.top_raters(n)
+  def self.top_raters(amount)
     sorted_by_amount_of_ratings_in_desc_order = User.all.sort_by{ |u| -u.ratings.count }
-    sorted_by_amount_of_ratings_in_desc_order.first(n)
+    sorted_by_amount_of_ratings_in_desc_order.first(amount)
   end
 
   def favorite_beer
