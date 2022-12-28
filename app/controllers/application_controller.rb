@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :check_admin
+  helper_method :brewery_clear_cache
 
   def ensure_that_signed_in
     redirect_to signin_path, notice: 'you should be signed in' if current_user.nil?
@@ -14,5 +15,9 @@ class ApplicationController < ActionController::Base
 
   def check_admin
     redirect_to root_path, notice: 'action not allowed' unless current_user&.admin
+  end
+
+  def brewery_clear_cache
+    expire_fragment('brewerylist')
   end
 end

@@ -10,6 +10,7 @@ FactoryBot.define do
   factory :brewery do
     name { "anonymous" }
     year { 1900 }
+    active { true }
   end
 
   factory :beer do

@@ -1,31 +1,33 @@
-<h2>List of ratings</h2>
+<h1>Rating statistics</h1>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <h4>Most recent ratings</h4>
-      <ul>
-      <% @recent_ratings.each do |rating| %>
-        <li><%= rating %> <%= rating.created_at %></li>
-      <% end %>
-      </ul>
-    </div>
-    <div class="col-sm">
-      <h4>Most active users</h4>
-      <ul>
-      <% @top_raters.each do |rater| %>
-        <li><%= rater.username %> <%= rater.ratings.count %> ratings</li>
-      <% end %>
-      </ul>
+<% cache "topstats", skip_digest: true, expires_in: 15.minutes do %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h4>Most recent ratings</h4>
+        <ul>
+        <% @recent_ratings.each do |rating| %>
+          <li><%= rating %> <%= rating.created_at %></li>
+        <% end %>
+        </ul>
+      </div>
+      <div class="col-sm">
+        <h4>Most active users</h4>
+        <ul>
+        <% @top_raters.each do |rater| %>
+          <li><%= rater.username %> <%= rater.ratings.count %> ratings</li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-      <%= render "ratings/table", title: 'Best beers', entries: @best_beers if @best_beers%>
-      <%= render "table", title: "Best breweries", entries: @best_breweries if @best_breweries%>
-      <%= render "table", title: "Best styles", entries: @best_styles if @best_styles%>
-</div>
+  <div class="row">
+        <%= render "table", title: 'Best beers', entries: @best_beers if @best_beers%>
+        <%= render "table", title: "Best breweries", entries: @best_breweries if @best_breweries%>
+        <%= render "table", title: "Best styles", entries: @best_styles if @best_styles%>
+  </div>
+<% end %>
 
 <% if current_user %>
   <div>

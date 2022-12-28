@@ -1,4 +1,5 @@
 class Brewery < ApplicationRecord
+  extend TopRatings
   include RatingAverage
 
   has_many :beers, dependent: :destroy
@@ -9,9 +10,4 @@ class Brewery < ApplicationRecord
 
   scope :active, -> { where active: true }
   scope :retired, -> { where active: [nil, false] }
-
-  def self.top(amount)
-    sorted_by_rating_in_desc_order = Brewery.all.sort_by{ |b| -b.average_rating }
-    sorted_by_rating_in_desc_order.first(amount)
-  end
 end

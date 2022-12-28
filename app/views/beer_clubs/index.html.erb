@@ -1,9 +1,27 @@
 <h1>Beer clubs</h1>
 
-<div id="beer_clubs">
-  <% @beer_clubs.each do |beer_club| %>
-    <%= render beer_club %>
-  <% end %>
+<div id="beerclubs">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col"><%= link_to "Name", beer_clubs_path(order: "name")%></th>
+        <th scope="col"><%= link_to "Founded", beer_clubs_path(order: "founded")%></th>
+        <th scope="col"><%= link_to "Location", beer_clubs_path(order: "city")%></th>
+        <th scope="col" class="text-center">Members</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @beer_clubs.each do |club| %>
+        <tr>
+          <td><%= link_to club.name, club %></td>
+          <td><%= club.founded %></td>
+          <td><%= club.city %></td>
+          <td class="text-center"><%= club.members.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <%= link_to "New beer club", new_beer_club_path, class: "btn btn-primary" if current_user %>

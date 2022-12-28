@@ -10,7 +10,7 @@
         <th scope="col" class="text-nowrap">Favorite brewery</th>
         <th scope="col" class="text-nowrap">Ratings given</th>
         <th scope="col" class="text-nowrap">Average</th>
-        <% if current_user&.admin %>
+        <% if @current_user&.admin %>
           <th scope="col" class="text-nowrap"></th>
         <% end %>
       </tr>
@@ -22,10 +22,10 @@
           <td class="text-nowrap text-right"><%= user.favorite_beer %></td>
           <td class="text-nowrap text-right"><%= user.favorite_style %></td>
           <td class="text-nowrap text-right"><%= user.favorite_brewery %></td>
-          <td class="text-center"><%= user.ratings.count %></td>
+          <td class="text-center"><%= user.ratings.size %></td>
           <td class="text-center"><%= round(user.average_rating) %></td>
           <td>
-            <% if current_user&.admin %>
+            <% if @current_user&.admin %>
               <% if not user.active %>
                 <span class="badge bg-danger">closed</span>
               <% end %>

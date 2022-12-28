@@ -1,5 +1,9 @@
 class RatingsController < ApplicationController
+  before_action :brewery_clear_cache, only: [:create, :destroy]
+
   def index
+    return if request.format.html? && fragment_exist?("topstats")
+
     @ratings = Rating.all
     @recent_ratings = Rating.most_recent
     @top_raters = User.top_raters(3)

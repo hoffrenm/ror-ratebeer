@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :check_admin, only: [:destroy, :toggle_activity]
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = User.includes(:beers, :ratings).all
+    @current_user = current_user
   end
 
   # GET /users/1 or /users/1.json

@@ -28,6 +28,8 @@ gem 'httparty'
 gem 'bootstrap', '~> 5.2.0'
 gem 'jquery-rails'
 gem 'mini_racer'
+gem 'rack-mini-profiler'
+gem 'sucker_punch', '~> 3.0'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"

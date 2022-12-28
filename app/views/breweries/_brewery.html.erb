@@ -1,51 +1,56 @@
-<div id="<%= dom_id brewery %>">
- <h2>
-    <%= brewery.name %>
-    <% if not brewery.active  %>
-      <span class="badge bg-secondary">retired</span>
-    <% end %>
-  </h2>
+<% cache @brewery do %>
+  <div id="<%= dom_id brewery %>">
+    <h2>
+      <%= brewery.name %>
+      <% if not brewery.active  %>
+        <span class="badge bg-secondary">retired</span>
+      <% end %>
+    </h2>
 
-  <i>
-    Established at <%= brewery.year %>
-  </i>
+    <i>
+      Established at <%= brewery.year %>
+    </i>
 
-  <p>
-    Beers count: <%= brewery.beers.count %>
-  </p>
+    <p>
+      Beers count: <%= brewery.beers.count %>
+    </p>
 
-  <div id="beers">
-    <table class="table">
-        <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Ratings given</th>
-        <th scope="col">Average rating</th>
-      </tr>
-    </thead>
-      <tbody>
-        <% @brewery.beers.each do |beer| %>
-          <tr>
-            <td><%= link_to beer.name, beer %></td>
-            <td><%= beer.ratings.count %></td>
-            <td><%= round(beer.average_rating) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div id="beers">
+      <table class="table">
+          <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Style</th>
+
+          <th scope="col" class="text-center">Ratings received</th>
+          <th scope="col" class="text-center">Average rating</th>
+        </tr>
+      </thead>
+        <tbody>
+          <% @brewery.beers.each do |beer| %>
+            <tr>
+              <td><%= link_to beer.name, beer %></td>
+              <td><%= link_to beer.style %></td>
+              <td class="text-center"><%= beer.ratings.count %></td>
+              <td class="text-center"><%= round(beer.average_rating) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <% if brewery.ratings.empty? %>
+        This brewery has no rated beers
+      <% else %>
+        Brewery has 
+        <b><%= brewery.beers.count %> <%= 'beer'.pluralize(brewery.beers.count) %></b>
+        with total of
+        <b><%= brewery.ratings.count %> <%= 'rating'.pluralize(brewery.ratings.count) %></b>
+        which average rating is
+        <b><%= round(brewery.average_rating) %></b>
+      <% end %>
+    </p>
+
   </div>
-
-  <p>
-    <% if brewery.ratings.empty? %>
-      This brewery has no rated beers
-    <% else %>
-      Brewery has 
-      <b><%= brewery.beers.count %> <%= 'beer'.pluralize(brewery.beers.count) %></b>
-      with total of
-      <b><%= brewery.ratings.count %> <%= 'rating'.pluralize(brewery.ratings.count) %></b>
-      which average rating is
-      <b><%= round(brewery.average_rating) %></b>
-    <% end %>
-  </p>
-
-</div>
+<% end %>
