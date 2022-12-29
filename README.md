@@ -3,3 +3,5 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/b73ed37aa75d603849e7/maintainability)](https://codeclimate.com/github/hoffrenm/ror-ratebeer/maintainability)
 
 #### [Sovellus fly.io:ssa](https://wandering-leaf-1917.fly.dev/)
+
+Admin toiminnallisuus kokeiltavissa kirjautumalla käyttäjätiedoilla `admin`:`Admin1`. Peruskäyttäjän oikeudet rajoitetummat muokkaus- ja poistotoiminnallisuuksien suhteen.
