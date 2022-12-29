@@ -18,6 +18,7 @@ class RatingsController < ApplicationController
   end
 
   def create
+    %w[beerlist-name beerlist-brewery beerlist-style].each{ |f| expire_fragment(f) }
     @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
     @rating.user = current_user
 
@@ -30,6 +31,7 @@ class RatingsController < ApplicationController
   end
 
   def destroy
+    %w[beerlist-name beerlist-brewery beerlist-style].each{ |f| expire_fragment(f) }
     rating = Rating.find params[:id]
     rating.delete if current_user == rating.user
     redirect_to user_path(current_user)
